@@ -1,0 +1,5 @@
+
+{
+  "name": "Chat App",
+  "description": "A robust, dark-themed real-time chat application built with React, TypeScript, and Socket.IO, fully integrated with a custom Node.js/Express backend."
+}
