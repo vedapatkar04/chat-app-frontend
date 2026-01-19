@@ -107,20 +107,20 @@ const ChatPage: React.FC<ChatPageProps> = ({ onOpenSettings, onLogout }) => {
 
     // Requirement: Call "message" emit in personal chat just like group chat
     // Based on backend rootSocket.ts logic
-    // const payload = {
-    //   userId: selectedChat.type === EChatType.personal ? (selectedChat.userId || '') : myId,
-    //   type: selectedChat.type, // 1 for Group, 2 for Personal
-    //   channelId: selectedChat.channelId,
-    //   message: messageInput
-    // };
-
     const payload = {
-  userId: myId, // ✅ ALWAYS sender ID
-  type: selectedChat.type, // 1 = group, 2 = personal
-  channelId: selectedChat.type === EChatType.group ? selectedChat.channelId : undefined,
-  receiverId: selectedChat.type === EChatType.personal ? selectedChat.userId : undefined,
-  message: messageInput
-};
+      userId: selectedChat.type === EChatType.personal ? (selectedChat.userId || '') : myId,
+      type: selectedChat.type, // 1 for Group, 2 for Personal
+      channelId: selectedChat.channelId,
+      message: messageInput
+    };
+
+//     const payload = {
+//   userId: myId, // ✅ ALWAYS sender ID
+//   type: selectedChat.type, // 1 = group, 2 = personal
+//   channelId: selectedChat.type === EChatType.group ? selectedChat.channelId : undefined,
+//   receiverId: selectedChat.type === EChatType.personal ? selectedChat.userId : undefined,
+//   message: messageInput
+// };
 
 
     socketService.emit<ISocketResponse<IMessage>>('message', payload, (res) => {
