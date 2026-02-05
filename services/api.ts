@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Replace with your Hostinger backend URL
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
 export const api = axios.create({
   baseURL: BACKEND_URL,

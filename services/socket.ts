@@ -2,7 +2,7 @@
 import { io, Socket } from 'socket.io-client';
 import { getAuth } from './api';
 
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = process.env.REACT_APP_API_URL || "http://localhost:3000";
 
 class SocketService {
   public socket: Socket | null = null;
