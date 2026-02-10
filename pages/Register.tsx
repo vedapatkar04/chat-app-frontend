@@ -1,19 +1,25 @@
-
-import React, { useState } from 'react';
-import { api } from '../services/api';
+import React, { useState } from "react";
+import { api } from "../services/api";
 
 interface RegisterProps {
   onNavigate: () => void;
 }
 
 const Register: React.FC<RegisterProps> = ({ onNavigate }) => {
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await api.post('/user/register', { userName, email, password });
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    await api.post("/user/register", { userName, email, password });
     onNavigate();
   };
 
@@ -25,7 +31,9 @@ const Register: React.FC<RegisterProps> = ({ onNavigate }) => {
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-slate-400 mb-2">Username</label>
+            <label className="block text-sm font-medium text-slate-400 mb-2">
+              Username
+            </label>
             <input
               type="text"
               value={userName}
@@ -35,7 +43,9 @@ const Register: React.FC<RegisterProps> = ({ onNavigate }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-400 mb-2">Email</label>
+            <label className="block text-sm font-medium text-slate-400 mb-2">
+              Email
+            </label>
             <input
               type="email"
               value={email}
@@ -45,7 +55,9 @@ const Register: React.FC<RegisterProps> = ({ onNavigate }) => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-400 mb-2">Password</label>
+            <label className="block text-sm font-medium text-slate-400 mb-2">
+              Password
+            </label>
             <input
               type="password"
               value={password}
@@ -62,8 +74,11 @@ const Register: React.FC<RegisterProps> = ({ onNavigate }) => {
           </button>
         </form>
         <p className="mt-6 text-center text-slate-400">
-          Already have an account?{' '}
-          <button onClick={onNavigate} className="text-emerald-400 hover:underline">
+          Already have an account?{" "}
+          <button
+            onClick={onNavigate}
+            className="text-emerald-400 hover:underline"
+          >
             Login here
           </button>
         </p>

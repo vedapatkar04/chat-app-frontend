@@ -15,6 +15,12 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess, onNavigateRegister }) => 
     e.preventDefault();
     // The backend destructures userName, email, and password, 
     // but primarily uses email for the database lookup.
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+    
     const res = await api.post('/user/login', { email, password });
     const { userId, authToken, email: userEmail } = res.data.responseMsg;
     setAuth(userId, authToken, userEmail);
