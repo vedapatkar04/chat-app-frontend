@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Replace with your Hostinger backend URL
-const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const BACKEND_URL = import.meta.env.VITE_API_URL || "http://localhost:80";
 console.log("Backend URL:", import.meta.env.VITE_API_URL);
 
 export const api = axios.create({
